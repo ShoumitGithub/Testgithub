@@ -1,0 +1,618 @@
+---
+version: "3.1"
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - family_planning
+  - family_method
+
+actions:
+  - action_path
+  - action_family_method
+  - validate_request_family_planning_using_method_form
+  - action_next_options
+  - validate_request_0_3_months_form
+  - validate_request_3_4_years_form
+  - validate_request_5_10_years_form
+  - validate_request_permanent_form
+  - action_ask_0_3_months_method
+  - action_ask_daily_pills_advantage
+  - action_ask_daily_pills_disadvantage
+  - action_ask_daily_who_can_use_pills
+  - action_ask_daily_medical_conditions
+  - action_ask_daily_contraceptive_database
+  - action_ask_emergency_pill_explanation
+  - action_ask_emergency_pill_advantage
+  - action_ask_emergency_pill_disadvantage
+  - action_ask_emergency_who_can_and_cannot_use_contraceptive
+  - action_ask_emergency_contraceptive_database
+  - action_next_planning_action
+
+
+forms:
+  request_user_data_form:
+    required_slots:
+      - language
+      - gender
+      - age_group
+      - martial_status
+      - state
+      - lga
+
+  request_no_of_children_form:
+    required_slots:
+      - no_of_children
+
+  request_family_planning_using_method_form:
+    required_slots:
+      - is_planned_family_planning_before
+      - followed_method_before
+      - satisfied_last_method
+      - reason_for_not_satisfied
+      - prevent_pregnancy_time
+
+  select_do_you_understand:
+    required_slots:
+      - do_you_understand
+
+  request_0_3_months_form:
+    required_slots:
+      - 0_3_months_method
+      - daily_pills_advantage
+      - daily_pills_disadvantage
+      - daily_who_can_use_pills
+      - daily_medical_conditions
+      - daily_contraceptive_database
+      - emergency_pill_explanation
+      - emergency_pill_advantage
+      - emergency_pill_disadvantage
+      - emergency_who_can_and_cannot_use_contraceptive
+      - emergency_contraceptive_database
+
+  request_1_2_years_form:
+    required_slots:
+      - 1_2_years_method
+#
+#  request_3_4_years_form:
+#    required_slots:
+#      - 3_4_years_method
+#
+#  request_5_10_years_form:
+#    required_slots:
+#      - 5_10_years_method
+#
+#  request_permanent_form:
+#    required_slots:
+#      - permanent_method
+
+slots:
+
+  gender:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_user_data_form
+            requested_slot: gender
+  language:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_user_data_form
+            requested_slot: language
+  age_group:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_user_data_form
+            requested_slot: age_group
+  martial_status:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_user_data_form
+            requested_slot: martial_status
+  state:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_user_data_form
+            requested_slot: state
+  lga:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_user_data_form
+            requested_slot: lga
+
+  no_of_children:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_no_of_children_form
+            requested_slot: no_of_children
+
+  is_planned_family_planning_before:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_family_planning_using_method_form
+            requested_slot: is_planned_family_planning_before
+
+  followed_method_before:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_family_planning_using_method_form
+            requested_slot: followed_method_before
+
+  satisfied_last_method:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_family_planning_using_method_form
+            requested_slot: satisfied_last_method
+
+  prevent_pregnancy_time:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_family_planning_using_method_form
+            requested_slot: prevent_pregnancy_time
+
+  reason_for_not_satisfied:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_family_planning_using_method_form
+            requested_slot: reason_for_not_satisfied
+
+  do_you_understand:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: select_do_you_understand
+            requested_slot: do_you_understand
+
+#  0_3_months_method:
+#    type: text
+#    influence_conversation: false
+#    mappings:
+#      - type: from_text
+#        conditions:
+#          - active_loop: request_0_3_months_form
+#            requested_slot: 0_3_months_method
+
+  1_2_years_method:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_1_2_years_form
+            requested_slot: 1_2_years_method
+
+
+  0_3_months_method:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_0_3_months_form
+            requested_slot: 0_3_months_method
+
+  daily_pills_advantage:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_0_3_months_form
+            requested_slot: daily_pills_advantage
+
+  daily_pills_disadvantage:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_0_3_months_form
+            requested_slot: daily_pills_disadvantage
+
+  daily_who_can_use_pills:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_0_3_months_form
+            requested_slot: daily_who_can_use_pills
+
+
+  daily_medical_conditions:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_0_3_months_form
+            requested_slot: daily_medical_conditions
+
+  daily_contraceptive_database:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_0_3_months_form
+            requested_slot: daily_contraceptive_database
+
+  emergency_pill_advantage:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_0_3_months_form
+            requested_slot: emergency_pill_advantage
+
+  emergency_pill_disadvantage:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_0_3_months_form
+            requested_slot: emergency_pill_disadvantage
+
+
+  emergency_who_can_and_cannot_use_contraceptive:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_0_3_months_form
+            requested_slot: emergency_who_can_and_cannot_use_contraceptive
+
+
+  emergency_contraceptive_database:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_0_3_months_form
+            requested_slot: emergency_contraceptive_database
+
+  emergency_pill_explanation:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: request_0_3_months_form
+            requested_slot: emergency_pill_explanation
+
+
+responses:
+  utter_cheer_up:
+    - text: "Here is something to cheer you up:"
+      image: https://i.imgur.com/nGF1K8f.jpg
+  utter_did_that_help:
+    - text: Did that help you?
+  utter_happy:
+    - text: Great, carry on!
+  utter_goodbye:
+    - text: Bye
+  utter_iamabot:
+    - text: I am a bot, powered by Rasa.
+  utter_greet:
+    - text: >-
+        Hey! How are you today?
+         My name is Honey. I am a family planning counsellor. I am here to help with family 
+         planning knowledge and give you counselling.
+         I can answer your family planning questions, refer to an agent to speak with and also 
+         refer you to a family planning clinic.
+         Before we continue, I would like to get some of your details to help you better.
+  utter_ask_language:
+    - text: |
+        Please choose your preferred language
+      buttons:
+        - title: English
+          payload: English
+        - title: Hausa
+          payload: Hausa
+        - title: Yoruba
+          payload: Yoruba
+      button_type: vertical
+  utter_ask_gender:
+    - text: |
+        What is your Gender?
+      buttons:
+        - title: Male
+          payload: male
+        - title: Female
+          payload: female
+        - title: Prefer not to say
+          payload: Prefer not to say
+      button_type: vertical
+  utter_ask_age_group:
+    - text: |
+        What is your age group?
+      buttons:
+      - title: "15-25"
+        payload: "15-25"
+      - title: "26-35"
+        payload: "26-35"
+      - title: "36-45"
+        payload: "36-45"
+      - title: "46-55"
+        payload: "46-55"
+      button_type: vertical
+  utter_ask_martial_status:
+    - text: |
+        What is your Gender?
+      buttons:
+      - title: "Single"
+        payload: "Single"
+      - title: "Married"
+        payload: "Married"
+      - title: "Prefer not to say"
+        payload: "Prefer not to say"
+      button_type: vertical
+  utter_ask_state:
+    - text: |
+        Which state are you chatting from?
+      buttons:
+      - title: "Abia"
+        payload: "Abia"
+      - title: "Adamawa"
+        payload: "Adamawa"
+      - title: "Akwa Ibom"
+        payload: "Akwa Ibom"
+      - title: "Anambra"
+        payload: "Anambra"
+      - title: "Bauchi"
+        payload: "Bauchi"
+      button_type: vertical
+  utter_ask_lga:
+    - text: |
+        Choose the local government you are chatting from.
+      buttons:
+      - title: "Aguata"
+        payload: "Aguata"
+      - title: "Anambra East"
+        payload: "Anambra East"
+      - title: "Anambra West"
+        payload: "Anambra West"
+      - title: "Anaocha"
+        payload: "Anaocha"
+      - title: "Awka North"
+        payload: "Awka North"
+      button_type: vertical
+  utter_ask_path:
+    - text: |
+        What would you like to know about?
+      buttons:
+      - title: "I want to ask about family Planning."
+        payload: /I want to ask about family planning.
+      - title: "I want the nearest family planning clinic to me."
+        payload: /refer_me
+      - title: "Other reproductive health issues."
+        payload: /other_issues
+      - title: "I have a question"
+        payload: /ask_gpt
+      button_type: vertical
+  utter_ask_no_of_children:
+    - text: |
+        Alright. How many children do you have now?
+      buttons:
+      - title: "None"
+        payload: "None"
+      - title: "1-2"
+        payload: "1-2"
+      - title: "3-4"
+        payload: "3-4"
+      - title: "5+"
+        payload: "5+"
+  utter_ask_is_planned_family_planning_before:
+    - text: "Have you tried any family planning method before?"
+      buttons:
+        - title: "Yes"
+          payload: Yes
+        - title: "No"
+          payload: No
+  utter_ask_followed_method_before:
+    - text: "Ok, Which of these methods have you tried before?"
+      buttons:
+      - title: "Condoms and Diaphragms"
+        payload: "/previous_Condoms_and_Diaphragms"
+      - title: "Contraceptive Implants"
+        payload: "/previous_Contraceptive_Implants"
+      - title: "Daily Contraceptive Pill"
+        payload: "/previous_Daily_Contraceptive_Pill"
+      - title: "Emergency contraceptive pill"
+        payload: "/previous_Emergency_contraceptive_pill"
+      - title: "Injectibles contraceptives"
+        payload: "/previous_Injectibles"
+      - title: "IUD"
+        payload: "/previous_IUD"
+      - title: "IUS"
+        payload: "/previous_IUS"
+      button_type: vertical
+
+  utter_ask_satisfied_last_method:
+    - text: "Were you satisfied with the last method?"
+      buttons:
+        - title: "Yes"
+          payload: Yes
+        - title: "No"
+          payload: No
+  utter_ask_reason_for_not_satisfied:
+    - text: "Can you tell me why you were not satisfied?"
+
+  utter_ask_prevent_pregnancy_time:
+    - text: "How long do you want to prevent pregnancy?"
+      buttons:
+      - title: "0-3 months"
+        payload: 0-3 months
+      - title: "1-2 years"
+        payload: 1-2 years
+      - title: "3-4 years"
+        payload: 3-4 years
+      - title: "5-10 years"
+        payload: 5-10 years
+      - title: "Permanently"
+        payload: permanently
+      button_type: vertical
+
+  # 0-3 Months flow
+  utter_0_3_months_response:
+    - text: "If you want to prevent pregnancy within 0-3 months, the short term family planning methods or \n the Injectables will be the best for you."
+
+
+  utter_planning_do_you_understand_1:
+    - text: "Do you understand?"
+
+  utter_planning_do_you_understand_2:
+    - text: "Do you understand?"
+
+  utter_do_you_have_any_medical_conditions:
+    - text: Do you have any of the medical conditions listed?
+      buttons:
+        - title: Yes
+          payload: Yes
+        - title: No
+          payload: No
+        - title: I don't know
+          payload: i don't know
+
+  utter_daily_contraceptive_pills:
+    - text: "Let me tell you some of the effective and available daily contraceptive pills.
+              Click on any of them to get their full details."
+      buttons:
+        - title: Levofem
+          payload: Levofem
+        - title: Desofem
+          payload: Desofem
+        - title: Dianofem
+          payload: Dianofem
+
+  utter_ask_1_2_years_method:
+    - text: "You can use either the daily pills, the emergency pills, the injectables or the implants.\n
+             Choose any them from the options to get the full details about them."
+      buttons:
+        - title: "Daily contraceptive pills"
+          payload: Daily contraceptive pills
+        - title: "Emergency contraceptive pills"
+          payload: Emergency contraceptive pills
+        - title: "Injectable contraceptives"
+          payload: Injectable contraceptives
+        - title: "Contraceptive implants"
+          payload: Contraceptive implants
+
+  utter_1_2_years_response:
+    - text: "If you want to prevent pregnancy within 1-2 years, you can use any of the short-acting family planning methods, the Injectables or the Implants."
+  utter_3_4_years_response:
+    - text: "If you want to prevent pregnancy for up to  3 - 4 years, 
+            it is advisable to adopt long-acting reversible contraception or LARC methods."
+  utter_5_10_years_response:
+    - text: "If you want to prevent pregnancy for up to  5 - 10 years, 
+            it is advisable to adopt long-acting reversible contraception or LARC method."
+
+  utter_permanently_response:
+    - text: "Permanent family planning methods means the person will no longer be able to reproduce again.\n
+            Male: Vasectomy\n  
+            Female: Tubal ligation\n
+            Click on any of them to get a short explanation on them."
+      buttons:
+        - title: "Vasectomy"
+          payload: Vasectomy
+        - title: "Tubal Litigation"
+          payload: Tubal Litigation
+
+  utter_ask_do_you_understand:
+    - text: "Do you understand?"
+
+  utter_ask_3_4_years_method:
+    - text: "Long-acting reversible contraception, or LARC are:\n
+            1. The Injectables.\n
+            2. The Implants.\n
+            3. The IUS.\n
+            4. The IUD\n
+            While the short-acting methods are:\n
+            1. The daily contraceptive Pills.\n
+            2. The emergency contraceptive pills.\n
+            3. The barrier contraceptives\n
+            Choose any them from the options to get the full details about them."
+      buttons:
+        - title: "Daily contraceptive pills"
+          payload: Daily contraceptive pills
+        - title: "Emergency contraceptive pills"
+          payload: Emergency contraceptive pills
+        - title: "Injectable contraceptives"
+          payload: Injectable contraceptives
+        - title: "Contraceptive implants"
+          payload: Contraceptive implants
+        - title: "IUS"
+          payload: IUS
+        - title: "IUD"
+          payload: IUD
+
+  utter_ask_5_10_years_method:
+    - text: "The long-acting reversible contraception, or LARC method ideal for 5 to 10 pregnancy prevention are \n
+            1. The IUS\n
+            2. The IUD\n
+            Click on any of them to get the full details about them."
+      buttons:
+        - title: "IUS"
+          payload: IUS
+        - title: "IUD"
+          payload: IUD
+  utter_ask_permanent_method:
+    - text: "Permanent family planning methods means the person will no longer be able to reproduce again.\n
+            Male: Vasectomy\n
+            Female: Tubal ligation\n
+            Click on any of them to get a short explanation on them."
+      buttons:
+        - title: "Vasectomy"
+          payload: Vasectomy
+        - title: "Tubal Litigation"
+          payload: Tubal Litigation
+
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

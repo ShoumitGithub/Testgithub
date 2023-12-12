@@ -1,0 +1,45 @@
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: Welcome Screen
+  conversation_start: true
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - action: request_user_data_form
+    - active_loop: request_user_data_form
+    - active_loop: null
+    - action: action_path
+
+- rule: family planning
+  steps:
+    - intent: family_planning
+    - action: request_no_of_children_form
+    - active_loop: request_no_of_children_form
+    - active_loop: null
+    - action: action_family_method
+
+- rule: family method
+  steps:
+    - intent: family_method
+    - action: request_family_planning_using_method_form
+    - active_loop: request_family_planning_using_method_form
+    - active_loop: null
+    - action: action_next_options
+    - action: select_do_you_understand
+    - active_loop: select_do_you_understand
+    - active_loop: null
+    - action: request_0_3_months_form
+    - active_loop: request_0_3_months_form
+    - active_loop: null
